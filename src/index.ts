@@ -3,7 +3,8 @@ import "./bot"; // Import your bot
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+// Middleware
+app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Dictionary Bot is running!');
 });
