@@ -21,6 +21,63 @@ app.listen(PORT, () => {
 });
 
 
+// ✅ Handle the /start command
+bot.onText(/\/start/, (msg) => {
+  const chatId = msg.chat.id;
+
+  const welcomeText = `
+👋 *Welcome to Dictionary Bot!* 📚✨  
+
+I’m your personal vocabulary assistant. I can instantly provide:  
+- 📖 Definitions  
+- 🗣️ Parts of Speech  
+- 📝 Usage Examples  
+- 🔹 Synonyms & 🔸 Antonyms  
+
+*How to use me?*  
+Simply *send me any English word* — no need for commands.  
+
+Example:  
+\`apple\` 🍎 or \`serendipity\` ✨  
+
+I’ll reply with clear meanings and examples right away.  
+
+💡 *Tip:* Keep exploring new words daily to grow your vocabulary!  
+
+Happy Learning 🚀  
+`;
+
+  bot.sendMessage(chatId, welcomeText, { parse_mode: "Markdown" });
+});
+
+
+// ✅ Handle the /help command
+bot.onText(/\/help/, (msg) => {
+  const chatId = msg.chat.id;
+
+  const helpText = `
+❓ *How to use Dictionary Bot* 📚  
+
+Just *send me any English word*, and I’ll reply with:  
+- 📖 Definition(s)  
+- 🗣️ Part of Speech (noun, verb, adjective, etc.)  
+- 📝 Example sentences  
+- 🔹 Synonyms & 🔸 Antonyms  
+
+*Commands you can use:*  
+- /start – Welcome & introduction  
+- /help – Show this help guide  
+
+*Example:*  
+\`eloquent\` → I’ll return meanings, synonyms, antonyms, and examples.  
+
+💡 *Tip:* You don’t need special commands for words — just type them!  
+`;
+
+  bot.sendMessage(chatId, helpText, { parse_mode: "Markdown" });
+});
+
+
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text?.trim();
