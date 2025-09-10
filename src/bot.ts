@@ -2,10 +2,24 @@ import TelegramBot from "node-telegram-bot-api";
 import { fetchWordData } from "./api";
 import { Meaning } from "./types";
 import dotenv from "dotenv";
+import express from "express"
 
 dotenv.config();
 const token = process.env.TELEGRAM_BOT_TOKEN as string;
 const bot = new TelegramBot(token, { polling: true });
+
+// 🟢 Express server just for Render (keeps port open)
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("✅ Dictionary Bot is running!");
+});
+
+app.listen(PORT, () => {
+  console.log(`🌐 Server running on http://localhost:${PORT}`);
+});
+
 
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
